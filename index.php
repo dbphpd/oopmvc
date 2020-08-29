@@ -3,8 +3,8 @@
 /**
  * @Author: junnotarte
  * @Date:   2020-08-01 13:45:22
- * @Last Modified by:   junnotarte
- * @Last Modified time: 2020-08-01 16:18:18
+ * @Last Modified by:   Felix Notarte
+ * @Last Modified time: 2020-08-23 14:46:26
  */
 
 
@@ -15,6 +15,8 @@ ini_set('display_errors', 1);
 require_once 'src/helper.php';
 require_once 'src/Routes.php';
 require_once 'src/Template.php';
+require_once 'src/Model.php';
+
 
 use Ecommerce\Routes;
 
