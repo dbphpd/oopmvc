@@ -4,7 +4,7 @@
  * @Author: Felix Notarte
  * @Date:   2020-08-23 13:25:16
  * @Last Modified by:   Felix Notarte
- * @Last Modified time: 2020-08-23 14:39:10
+ * @Last Modified time: 2020-08-29 15:01:28
  */
 namespace Ecommerce;
 
@@ -13,6 +13,10 @@ class Model {
 
 	private $db;
 	private $sql_statement = '';
+
+	public  $tableName;
+	public  $dataTable;
+	public 	$inserted_id;
 
 
 	function __construct(){
@@ -68,12 +72,16 @@ class Model {
 	 * @param  array  $data  [fields in array format]
 	 * @return [type]        [primary id]
 	 */
-	public function insert(string $table, array $data) : bool {
+	public function insert(){
 
 		$fields = [];
 		$values = [];
+	
+		foreach ($this->dataTable as $key => $value) {
+			
+			if (empty($value))
+				continue;
 
-		foreach ($data as $key => $value) {
 			array_push($fields, $key);
 			
 			// checking
@@ -89,15 +97,15 @@ class Model {
 			}
 
 		}
-
-		$sql = 'INSERT INTO ' . $table . '(' . implode(',', $fields) . ') values(' . implode(',', $values) . ')';
+	
+		$sql = 'INSERT INTO ' . $this->tableName . '(' . implode(',', $fields) . ') values(' . implode(',', $values) . ')';
 
 		mysqli_query($this->db, $sql);
+		
+		$this->inserted_id =   mysqli_insert_id($this->db);
 
-		$id =  $this->db->insert_id;
-
-		return $id;
 	}
+
 
 
 	/**
