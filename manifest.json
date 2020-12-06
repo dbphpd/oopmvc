@@ -1,0 +1,23 @@
+{
+	"name": "php davao",
+	"short_name": "phpdavao",
+	"description": "safe davao qr code viewer",
+	"start_url": "http://localhost/?utm_source=homescreen",
+	"orientation": "portrait-primary",
+	"display": "standalone",
+	"background_color": "#0c0d0d",
+	"theme_color": "#0c0d0d",
+	"icons": [
+		{
+			"src": "http://localhost/assets/icons/icon-144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "http://localhost/assets/icons/icon-144x144px.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		}
+			
+	]
+}

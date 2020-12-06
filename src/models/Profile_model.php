@@ -4,7 +4,7 @@
  * @Author: Felix Notarte
  * @Date:   2020-08-23 13:34:58
  * @Last Modified by:   Felix Notarte
- * @Last Modified time: 2020-08-29 15:04:47
+ * @Last Modified time: 2020-12-06 14:57:26
  */
 
 namespace Ecommerce\Model;
@@ -51,14 +51,9 @@ class Profile_model extends Model {
 	}
 
 	public function _insert() {
-		$this->dataTable = get_object_vars($this);
-		$this->tableName = 'profile';
-		$this->insert();
+		$this->insert(get_object_vars($this));
 		return $this->inserted_id;
 	}
-
-
-
 
 
 }

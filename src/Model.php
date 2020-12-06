@@ -4,10 +4,9 @@
  * @Author: Felix Notarte
  * @Date:   2020-08-23 13:25:16
  * @Last Modified by:   Felix Notarte
- * @Last Modified time: 2020-08-29 15:01:28
+ * @Last Modified time: 2020-09-05 13:50:41
  */
 namespace Ecommerce;
-
 
 class Model {
 
@@ -31,7 +30,8 @@ class Model {
 	 * connection to db
 	 */
 	private function setConnection(){
-		$this->db = @mysqli_connect('db','root','docker','oop');
+		$config = $GLOBALS['CONFIG']['database'];
+		$this->db = @mysqli_connect($config['host'], $config['user'], $config['paswd'], $config['database']);
 
 		if (!$this->db) {
 			exit('Model Error: ' . mysqli_connect_error());
@@ -67,12 +67,27 @@ class Model {
 	}
 
 	/**
+	 * this will get the name of the 
+	 * an remove the _model. Assuming
+	 * name = tablename
+	 * @return [type] [description]
+	 */
+	public function getTableName() : string {
+		$class = get_class($this);
+		$lastOccur = strrpos($class , '\\') + 1;
+		return str_replace('_model', '', substr($class, $lastOccur));
+	}
+
+	/**
 	 * insert database
 	 * @param  string $table [table name]
 	 * @param  array  $data  [fields in array format]
 	 * @return [type]        [primary id]
 	 */
-	public function insert(){
+	public function insert($obj){
+
+		$this->dataTable = $obj;
+		$this->tableName  = strtolower($this->getTableName());
 
 		$fields = [];
 		$values = [];
